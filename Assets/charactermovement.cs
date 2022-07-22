@@ -7,11 +7,19 @@ public class charactermovement : MonoBehaviour
     public CharacterController2D ctrl;
     public Animator anim;
     public KeyCode attackBind = KeyCode.None;
+    public Rigidbody2D rb;
 
     public float runSpeed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
     bool isAttacking = false;
+    public int animationTimer = 34;
+
+    void Start ()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        Physics.IgnoreLayerCollision(1, 2);
+    }
 
     // Update is called once per frame
     void Update ()
@@ -30,10 +38,11 @@ public class charactermovement : MonoBehaviour
         {
             isAttacking = true;
             anim.SetBool("attack", true);
-        }else if(Input.GetKeyUp(attackBind))
+        }else if(animationTimer <= 0)
         {
             isAttacking = false;
             anim.SetBool("attack", false);
+            animationTimer = 34;
         }
     }
 
@@ -42,5 +51,10 @@ public class charactermovement : MonoBehaviour
         ctrl.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
         anim.SetBool("inair", false);
+
+        if(isAttacking)
+        {
+            animationTimer--;
+        }
     }
 }
