@@ -1,0 +1,21 @@
+cinemachine:
+
+lens ortho size: 2.5
+
+body: framing transposer
+aim: do nothing
+standby update: round robin
+
+body settings:
+lookahead time = 0
+lookahead smoothing = 0
+lookahead ignore y: true
+x y z dampening = 1
+target movement only: true
+screen x: 0.2
+screen y: 0.6
+camera distance: 10
+dead zone width and height: 0
+dead zone depth: 0
+unlimited soft zone: true
+center on activate: true
